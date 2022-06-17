@@ -1,0 +1,3 @@
+C:/Users/Victor/Documents/faculdade/3-Semestre/ED/listas/lista-merge/q-03/cmake-build-debug/CMakeFiles/q_03.dir
+C:/Users/Victor/Documents/faculdade/3-Semestre/ED/listas/lista-merge/q-03/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Victor/Documents/faculdade/3-Semestre/ED/listas/lista-merge/q-03/cmake-build-debug/CMakeFiles/rebuild_cache.dir
