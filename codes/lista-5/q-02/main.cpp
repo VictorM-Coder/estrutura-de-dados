@@ -21,15 +21,21 @@ ListNode* specialList(ListNode* head){
         head->next = nullptr;
         return head;
     }
+    if (head->next->next->next == nullptr){
+        ListNode *aux = head->next;
+        head->next = head->next->next;
+        head->next->next = aux;
+        return head;
+    }
 
-    ListNode* aux = head->next;
-    head->next = head->next->next;
-    head->next = specialList(head->next);
+
+
+    head->next = aux;
     return head;
 }
 
 ListNode* oddEvenList(ListNode* head){
-
+    return specialList(head);
 }
 
 
