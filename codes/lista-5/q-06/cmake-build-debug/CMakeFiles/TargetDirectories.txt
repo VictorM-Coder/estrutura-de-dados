@@ -1,0 +1,3 @@
+C:/Users/Victor/Documents/Programacao/repositorios/Meus_repositorios/estrutura-de-dados/codes/lista-5/q-06/cmake-build-debug/CMakeFiles/q_06.dir
+C:/Users/Victor/Documents/Programacao/repositorios/Meus_repositorios/estrutura-de-dados/codes/lista-5/q-06/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Victor/Documents/Programacao/repositorios/Meus_repositorios/estrutura-de-dados/codes/lista-5/q-06/cmake-build-debug/CMakeFiles/rebuild_cache.dir
