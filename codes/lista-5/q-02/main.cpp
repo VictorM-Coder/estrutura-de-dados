@@ -15,29 +15,24 @@ public:
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-ListNode* specialList(ListNode* head){
-    if(head->next == nullptr)return head;
-    if (head->next->next == nullptr){
-        head->next = nullptr;
-        return head;
-    }
-    if (head->next->next->next == nullptr){
-        ListNode *aux = head->next;
-        head->next = head->next->next;
-        head->next->next = aux;
-        return head;
+ListNode* oddEvenList(ListNode* head){
+    if(head == nullptr){
+        return nullptr;
     }
 
+    ListNode* odd = head;
+    ListNode* even = head->next;
+    ListNode* evenStart = even;
 
-
-    head->next = aux;
+    while(even != nullptr && even->next != nullptr){
+        odd->next = even->next;
+        odd = odd->next;
+        even->next = odd->next;
+        even = even->next;
+    }
+    odd->next = evenStart;
     return head;
 }
-
-ListNode* oddEvenList(ListNode* head){
-    return specialList(head);
-}
-
 
 int main(){
     int n;
