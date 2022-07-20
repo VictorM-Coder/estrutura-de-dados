@@ -1,5 +1,8 @@
 #include <iostream>
 #include <sstream>
+#include <string>
+
+#define MARKER "#"
 using namespace std;
 
 struct Node{
@@ -14,26 +17,34 @@ struct Node{
 };
 
 struct BTree{
-    Node * root;
+    Node * root {nullptr};
     BTree(){
-        this->root = nullptr;
     }
 
-    void clone(stringstream& ss, Node ** elo){
-        string value;
-        ss >> value;
-        if(value == "#")
-            return;
-        int num;
-        stringstream(value) >> num;
-        *elo =  new Node(num);
-        clone(ss, &(*elo)->left);
-        clone(ss, &(*elo)->right);
-    }
 
     BTree(string serial){
-        stringstream ss(serial);
-        clone(ss, &root);
+        stringstream serialStream(serial);
+        addItem(root, serialStream);
+    }
+
+    void addItem(Node * &node, stringstream & serial){
+        string val;
+        serial >> val;
+
+        if (val == MARKER){
+            return;
+        }
+
+        int value;
+        stringstream(val) >> value;
+        node = new Node(value);
+
+        addItem(node->left, serial);
+        addItem(node->right, serial);
+    }
+
+    ~BTree(){ //destrutor da árvore
+        __destroy(this->root);
     }
 
     void __destroy(Node * node){
@@ -44,35 +55,45 @@ struct BTree{
         delete node;
     }
 
-    ~BTree(){
-        __destroy(this->root);
+    void bshow(){
+        __bshow(this->root);
     }
 
-    string find_path(Node * node, int value){
-        if (node == nullptr){
-            return "!";
+    void __bshow(Node * node, string heranca = ""){
+        if(node != nullptr && (node->left != nullptr || node->right != nullptr))
+            __bshow(node->left , heranca + "l");
+        for(int i = 0; i < (int) heranca.size() - 1; i++)
+            cout << (heranca[i] != heranca[i + 1] ? "│   " : "    ");
+        if(heranca != "")
+            cout << (heranca.back() == 'l' ? "┌───" : "└───");
+        if(node == nullptr){
+            cout << "#" << endl;
+            return;
         }
-
-        if(value == node->value){
-            return "x";
-        }
-
-        if(node->value > value){
-            return "l" + find_path(node->left, value);
-        }
-
-        if(node->value < value){
-            return "r" + find_path(node->right, value);
-        }
+        cout << node->value << endl;
+        if(node != nullptr && (node->left != nullptr || node->right != nullptr))
+            __bshow(node->right, heranca + "r");
     }
+
+    void show_in_order(){
+        cout << "[ ";
+        __show_in_order(root);
+        cout << "]\n";
+    }
+
+    void __show_in_order(Node * node){
+        if(node == nullptr)
+            return;
+        __show_in_order(node->left);
+        cout << node->value << " ";
+        __show_in_order(node->right);
+    }
+
 };
 
 int main(){
     string line;
     getline(cin, line);
     BTree bt(line);
-    int value;
-    cin >> value;
-    string path = bt.find_path(bt.root, value);
-    cout << path << "\n";
+    bt.show_in_order();
 }
